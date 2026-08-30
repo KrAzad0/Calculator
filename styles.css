@@ -1,0 +1,222 @@
+:root {
+  color-scheme: light;
+  --bg: #eef2f7;
+  --panel: rgba(255, 255, 255, 0.88);
+  --text: #111827;
+  --muted: #6b7280;
+  --display: #f7f9fc;
+  --key: #ffffff;
+  --key-hover: #f1f5f9;
+  --utility: #e5e7eb;
+  --operator: #dbeafe;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --border: rgba(148, 163, 184, 0.28);
+  --shadow: 0 24px 70px rgba(15, 23, 42, 0.16);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b1220;
+  --panel: rgba(17, 24, 39, 0.92);
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --display: #111827;
+  --key: #1f2937;
+  --key-hover: #2b3648;
+  --utility: #334155;
+  --operator: #1e3a5f;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --border: rgba(148, 163, 184, 0.16);
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.15), transparent 30%),
+    radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.12), transparent 30%),
+    var(--bg);
+  color: var(--text);
+  transition: background 180ms ease, color 180ms ease;
+}
+
+button {
+  font: inherit;
+}
+
+.page-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.calculator {
+  width: min(100%, 390px);
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.calculator__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.brand {
+  font-size: 0.95rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--key);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+.theme-toggle:hover {
+  background: var(--key-hover);
+}
+
+.theme-toggle:active {
+  transform: scale(0.96);
+}
+
+.display {
+  min-height: 126px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 18px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--display);
+}
+
+.display__history,
+.display__result {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.display__history::-webkit-scrollbar,
+.display__result::-webkit-scrollbar {
+  display: none;
+}
+
+.display__history {
+  min-height: 22px;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.display__result {
+  font-size: clamp(2.35rem, 10vw, 3.35rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.key {
+  aspect-ratio: 1 / 0.82;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  background: var(--key);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1.15rem;
+  font-weight: 650;
+  transition: transform 90ms ease, background 120ms ease, box-shadow 120ms ease;
+  user-select: none;
+}
+
+.key:hover {
+  background: var(--key-hover);
+}
+
+.key:focus-visible,
+.theme-toggle:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.32);
+  outline-offset: 2px;
+}
+
+.key:active,
+.key.is-pressed {
+  transform: scale(0.95);
+}
+
+.key--utility {
+  background: var(--utility);
+}
+
+.key--operator {
+  background: var(--operator);
+  color: var(--accent);
+}
+
+.key--equals {
+  background: var(--accent);
+  color: white;
+  border-color: transparent;
+}
+
+.key--equals:hover {
+  background: var(--accent-hover);
+}
+
+.keyboard-hint {
+  margin: 15px 2px 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+@media (max-width: 420px) {
+  .page-shell {
+    padding: 12px;
+  }
+
+  .calculator {
+    padding: 16px;
+    border-radius: 24px;
+  }
+
+  .keypad {
+    gap: 8px;
+  }
+}
